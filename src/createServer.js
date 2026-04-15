@@ -77,8 +77,21 @@ function createServer() {
         }
       });
     } else {
-      res.writeHead(404, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Not Found' }));
+      const notFoundHtml = `<!doctype html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Not Found</title>
+          </head>
+          <body>
+            <h1>404 - Not Found</h1>
+            <p>Sorry, the page you are looking for does not exist.</p>
+          </body>
+        </html>`;
+
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(notFoundHtml);
     }
   });
 }
